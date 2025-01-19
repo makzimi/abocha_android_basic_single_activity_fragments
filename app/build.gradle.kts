@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -22,6 +22,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        compose = true
     }
 
     buildTypes {
@@ -32,6 +33,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+
+    composeCompiler {
+        reportsDestination = layout.buildDirectory.dir("compose_compiler")
+        //stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
 
     compileOptions {
@@ -55,4 +61,10 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.google.material)
     implementation(libs.kotlin.stdlib)
+    implementation(libs.compose.material.iconsext)
+    implementation(libs.compose.material3.material3)
+    implementation(libs.compose.foundation.layout)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.ui.util)
 }
